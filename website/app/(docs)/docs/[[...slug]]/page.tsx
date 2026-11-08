@@ -59,6 +59,6 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: page.url, types: { "text/markdown": markdownUrl } },
-    openGraph: { ...openGraphDefaults, type: "article", url: page.url, title, description },
+    openGraph: { ...openGraphDefaults, url: page.url, title, description },
   }
 }
