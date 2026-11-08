@@ -64,7 +64,7 @@ Com mais de um provedor, `routing` escolhe qual cria cada cobrança, entre os qu
 routing: ({ amountInCents }) => (amountInCents > 50_000 ? "woovi" : "abacatepay")
 ```
 
-A função também pode devolver uma lista, que vira a ordem de tentativa.
+A função também pode devolver uma lista, que vira a ordem de tentativa, e pode ser `async` para consultar o seu banco ou uma configuração remota antes de escolher.
 
 ## Webhooks
 

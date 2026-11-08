@@ -180,6 +180,8 @@ routing: { weights: { woovi: 70, abacatepay: 30 } }
 routing: ({ amountInCents }) => (amountInCents > 50_000 ? "woovi" : "abacatepay")
 ```
 
+A routing function can return a list, which becomes the order dunas tries, and can be async, so it can read your database or remote config before picking.
+
 Webhooks are only a signal: dunas verifies them, then reads the charge back from the gateway before changing anything.
 
 ## Testing

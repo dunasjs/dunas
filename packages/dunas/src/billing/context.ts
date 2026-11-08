@@ -13,7 +13,9 @@ export type Routing<TProviderId extends string> =
   | "failover"
   | "round-robin"
   | { weights: Partial<Record<TProviderId, number>> }
-  | ((input: RoutingInput) => TProviderId | readonly TProviderId[])
+  | ((
+      input: RoutingInput,
+    ) => Promise<TProviderId | readonly TProviderId[]> | TProviderId | readonly TProviderId[])
 
 export type Context = {
   database: Database

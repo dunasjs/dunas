@@ -31,7 +31,7 @@ export async function createCharge(context: Context, input: CreateChargeInput) {
   const { method, checkout, amountInCents } = subscription
   const chargeId = createId("chg")
   const failures: ProviderError[] = []
-  const providers = orderProviders(context, {
+  const providers = await orderProviders(context, {
     customerId: customer.id,
     amountInCents,
     method,

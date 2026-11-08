@@ -2,8 +2,12 @@ import type { Checkout, PaymentMethod, PaymentProvider } from "../providers/prov
 import type { Context, RoutingInput } from "./context.ts"
 import { DunasError } from "./errors.ts"
 
-export function orderProviders(context: Context, input: RoutingInput & { checkout: Checkout }) {
-  const supporting = routeProviders(context, input).filter((provider) => supports(provider, input))
+export async function orderProviders(
+  context: Context,
+  input: RoutingInput & { checkout: Checkout },
+) {
+  const routed = await routeProviders(context, input)
+  const supporting = routed.filter((provider) => supports(provider, input))
   if (supporting.length === 0) {
     throw new DunasError(
       "METHOD_NOT_AVAILABLE",
@@ -30,7 +34,10 @@ export function findProvider(providers: readonly PaymentProvider[], providerId: 
   return provider
 }
 
-function routeProviders({ providers, routing, roundRobinCounter }: Context, input: RoutingInput) {
+async function routeProviders(
+  { providers, routing, roundRobinCounter }: Context,
+  input: RoutingInput,
+) {
   if (routing === "failover") {
     return providers
   }
@@ -42,7 +49,7 @@ function routeProviders({ providers, routing, roundRobinCounter }: Context, inpu
   }
 
   if (typeof routing === "function") {
-    const chosen = [routing(input)].flat()
+    const chosen = [await routing(input)].flat()
     return chosen.map((providerId) => findProvider(providers, providerId))
   }
 

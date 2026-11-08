@@ -338,6 +338,19 @@ describe("routing", () => {
       provider: "abacatepay",
     })
   })
+
+  it("waits for an async function and tries its list in order", async () => {
+    const { billing } = await setup({
+      providers: [fakeProvider("woovi"), fakeProvider("abacatepay", { failing: true })],
+      routing: async () => ["abacatepay", "woovi"],
+    })
+
+    const result = await billing.subscribe({ customerId: "user_1", planId: "pro" })
+
+    expect(await billing.getCharge({ chargeId: chargeIdOf(result) })).toMatchObject({
+      provider: "woovi",
+    })
+  })
 })
 
 describe("http handler", () => {
