@@ -12,6 +12,7 @@ import { notFound } from "next/navigation"
 import { getMDXComponents } from "@/components/mdx"
 import { getPageMarkdownUrl } from "@/lib/docs-routes"
 import { links } from "@/lib/links"
+import { openGraphDefaults } from "@/lib/site-metadata"
 import { source } from "@/lib/source"
 
 export default async function Page({ params }: PageProps<"/docs/[[...slug]]">) {
@@ -51,5 +52,13 @@ export async function generateMetadata({
   const page = source.getPage(slug)
   if (!page) notFound()
 
-  return { title: page.data.title, description: page.data.description }
+  const { title, description } = page.data
+  const { url: markdownUrl } = getPageMarkdownUrl(page)
+
+  return {
+    title,
+    description,
+    alternates: { canonical: page.url, types: { "text/markdown": markdownUrl } },
+    openGraph: { ...openGraphDefaults, type: "article", url: page.url, title, description },
+  }
 }

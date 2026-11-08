@@ -2,10 +2,13 @@ import { RootProvider } from "fumadocs-ui/provider/next"
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import { fontVariables } from "@/lib/fonts"
+import { links } from "@/lib/links"
 import { translations } from "./translations"
 import "./docs.css"
 
 export const metadata: Metadata = {
+  metadataBase: new URL(links.site),
+  twitter: { card: "summary_large_image" },
   title: { template: "%s — dunas", default: "Documentação — dunas" },
 }
 

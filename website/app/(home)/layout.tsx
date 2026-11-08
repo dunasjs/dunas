@@ -3,13 +3,17 @@ import type { ReactNode } from "react"
 import { CopyEditor } from "@/components/copy-editor/copy-editor"
 import { fontVariables } from "@/lib/fonts"
 import { links } from "@/lib/links"
+import { openGraphDefaults } from "@/lib/site-metadata"
+import { description, title } from "./site-copy"
 import "./globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL(links.site),
-  title: "dunas — o billing do seu SaaS em uma biblioteca",
-  description:
-    "Planos, assinaturas e limites de uso numa API só, rodando dentro do seu app e no seu Postgres.",
+  title,
+  description,
+  alternates: { canonical: "/" },
+  openGraph: { ...openGraphDefaults, type: "website", url: "/", title, description },
+  twitter: { card: "summary_large_image" },
 }
 
 export default function HomeLayout({ children }: { children: ReactNode }) {

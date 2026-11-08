@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { getPageMarkdownUrl } from "@/lib/docs-routes"
+import { links } from "@/lib/links"
 import { docsLlms, source } from "@/lib/source"
 
 export const revalidate = false
@@ -13,7 +14,10 @@ export async function GET(
   if (!page) notFound()
 
   return new Response(await docsLlms.page(page), {
-    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+    headers: {
+      "Content-Type": "text/markdown; charset=utf-8",
+      Link: `<${links.site}${page.url}>; rel="canonical"`,
+    },
   })
 }
 

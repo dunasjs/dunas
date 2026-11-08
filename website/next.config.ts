@@ -1,5 +1,6 @@
 import { createMDX } from "fumadocs-mdx/next"
 import type { NextConfig } from "next"
+import { links } from "./lib/links"
 
 const withMDX = createMDX()
 
@@ -7,6 +8,16 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["100.123.155.61", "dev", "dev.tail8eb3d.ts.net"],
   images: { unoptimized: true },
   skipTrailingSlashRedirect: true,
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: `www.${new URL(links.site).host}` }],
+        destination: `${links.site}/:path*`,
+        permanent: true,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
