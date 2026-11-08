@@ -4,8 +4,6 @@
 
 Billing for Brazil that runs inside your app. Plans, usage limits and subscriptions paid by Pix, Pix Automático or card on top of **Woovi** and **AbacatePay**, with one API, your own Postgres and no billing server in between.
 
-Inspired by [paykit](https://paykit.sh), which does this for Stripe.
-
 ```ts
 const { allowed } = await billing.consume({ customerId: user.id, featureId: "messages" })
 if (!allowed) return Response.json({ error: "Limite do plano atingido" }, { status: 402 })
