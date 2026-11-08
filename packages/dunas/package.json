@@ -6,7 +6,7 @@
   "homepage": "https://dunasjs.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThallesP/dunas.git",
+    "url": "git+https://github.com/dunasjs/dunas.git",
     "directory": "packages/dunas"
   },
   "type": "module",

@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/ThallesP/dunas/main/assets/icon.svg" width="64" height="64" alt="">
+<img src="https://raw.githubusercontent.com/dunasjs/dunas/main/assets/icon.svg" width="64" height="64" alt="">
 
 # dunas
 
