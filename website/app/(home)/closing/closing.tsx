@@ -17,7 +17,7 @@ export function Closing() {
           Roda no seu app.
           <br />É seu.
         </h2>
-        <p className={`lede ${styles.lede}`}>Código aberto, licença MIT. Inspirado no paykit.</p>
+        <p className={`lede ${styles.lede}`}>Código aberto, licença MIT.</p>
         <CopyButton
           text={agentPrompt}
           iconSize={30}
