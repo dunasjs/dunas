@@ -28,7 +28,11 @@ export function Posts() {
                     <XIcon />
                   </span>
                 </div>
-                <p className={styles.text}>{post.text}</p>
+                <p className={styles.text}>
+                  {post.text
+                    .split(/\*\*(.+?)\*\*/)
+                    .map((part, index) => (index % 2 ? <mark key={index}>{part}</mark> : part))}
+                </p>
                 <time className={styles.date}>{post.date}</time>
               </a>
             </li>

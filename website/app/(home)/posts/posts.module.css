@@ -77,6 +77,15 @@
   white-space: pre-line;
 }
 
+.text mark {
+  padding: 1px 3px;
+  margin-inline: -3px;
+  border-radius: 4px;
+  background: rgba(247, 217, 168, 0.12);
+  color: var(--amber);
+  box-decoration-break: clone;
+}
+
 .date {
   display: block;
   margin-top: 14px;
